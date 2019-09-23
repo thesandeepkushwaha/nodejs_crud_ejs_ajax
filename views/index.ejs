@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Student Details</title>
+  <link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+  <body>
+    <div class="container">
+      <h2>Student detail</h2>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">Add New Detail</button><br />
+      <table class="table table-striped" id="mytable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var i= 1; %>
+          <% results.forEach((results, index) => { %>
+          <tr>
+            <td><%= i %></td>
+            <td><%= results.uname %></td>
+            <td><%= results.email %></td>
+            <td><%= results.mobile %></td>
+            <td><%= results.address %></td>
+            <td><%= results.city %></td>
+            <td>
+              <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="<%= results.id %>"
+                data-uname="<%= results.uname %>" data-email="<%= results.email %>" data-mobile="<%= results.mobile %>"
+                data-address="<%= results.address %>" data-city="<%= results.city %>">Edit</a>
+              <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-id="<%= results.id %>">Delete</a>
+            </td>
+          </tr>
+          <% i++; %>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <!-- Add New Product Modal-->
+    <form id="addUserForm">
+      <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add New Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input type="text" name="uname" id="add_name" class="form-control" placeholder="Name" required>
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="email" id="add_email" class="form-control" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="mobile" id="add_mobile" class="form-control" placeholder="Mobile" required>
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="address" id="add_address" class="form-control" placeholder="Address" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="city" id="add_city" class="form-control" placeholder="City" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" id="add_submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Edit Product Modal-->
+    <form id="updateUserForm">
+      <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input type="text" name="uname" id="update_name" class="form-control uname"  required>
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="email" id="update_email" class="form-control email"  required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="mobile" id="update_mobile" class="form-control mobile" 
+           required>
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="address" id="update_address" class="form-control address" 
+                  required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="city" id="update_city" class="form-control city" required>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="update_id" id="id" class="id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" id="update_submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Delete Product Modal-->
+    <form id="add-row-form">
+      <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">Delete Data</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <strong>Are You Sure To Delete This Data?</strong>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="id" id="delete_id" class="form-control id2" required>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" id="delete_submit" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <script src="/javascripts/jquery-3.3.1.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+    <script>
+      $(document).ready(function () {
+        //showing data to modal for edit record
+        $('#mytable').on('click', '.edit', function () {
+          var id = $(this).data('id');
+          var uname = $(this).data('uname');
+          var email = $(this).data('email');
+          var mobile = $(this).data('mobile');
+          var address = $(this).data('address');
+          var city = $(this).data('city');
+          $('#EditModal').modal('show');
+          $('.id').val(id);
+          $('.uname').val(uname);
+          $('.email').val(email);
+          $('.mobile').val(mobile);
+          $('.address').val(address);
+          $('.city').val(city);
+        });
+        //showing modal for delete record
+        $('#mytable').on('click', '.delete', function () {
+          var id = $(this).data('id');
+          $('#DeleteModal').modal('show');
+          $('.id2').val(id);
+        });
+      });
+
+      $(document).ready(function(){
+$("#delete_submit").click(function(){
+ 
+ 
+    var  delete_Data = {delete_id : $("#delete_id").val()
+      }
+  
+  // var formData = new FormData($(this)[0]);
+  $.ajax({
+              type: "delete",
+              url: "/delete",
+              contentType : "application/json",
+              data : JSON.stringify(delete_Data),
+              success: function(msg){ 
+    }
+              });
+          });
+      });
+
+
+      $(document).ready(function(){
+$("#update_submit").click(function(){
+ 
+  var  updateData = {
+    update_id : $(".id").val(),
+      update_name : $("#update_name").val(),
+      update_email : $("#update_email").val(),
+      update_mobile : $("#update_mobile").val(),
+      update_address : $("#update_address").val(),
+      update_city : $("#update_city").val()
+      }
+  
+  // var formData = new FormData($(this)[0]);
+  $.ajax({
+              type: "put",
+              url: "/update",
+              contentType : "application/json",
+              data : JSON.stringify(updateData),
+              success: function(msg){ 
+    }
+              });
+          });
+      });
+
+      
+      $(document).ready(function(){
+$("#add_submit").click(function(){
+  var formData = {
+     add_id : $("#add_id").val(),
+     add_name : $("#add_name").val(),
+     add_email : $("#add_email").val(),
+     add_mobile : $("#add_mobile").val(),
+     add_address : $("#add_address").val(),
+     add_city : $("#add_city").val()
+      }
+
+  
+  // var formData = new FormData($(this)[0]);
+  $.ajax({
+              type: "POST",
+              url: "/save",
+              contentType : "application/json",
+              data : JSON.stringify(formData),
+              success: function(msg){ 
+    }
+              });
+          });
+      });
+
+    </script>
+
+  </body>
+
+</html>
